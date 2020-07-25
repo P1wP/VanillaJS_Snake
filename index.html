@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+        <!-- BootStrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <!-- FontAwesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <!-- TITLE -->
+	<title> snake_VanillaJS </title>
+</head>
+
+<body onload="checkSupported()">
+    <header>
+        <h1 id="heading">SNAKE!</h1>
+    </header>
+    
+    <div id="points">
+        <p>HighScore: <span id="highscore">0</span></p>
+        <p>Points: <span id="thisPoints">0</span></p>
+    </div>
+    <canvas 
+            id="canvasGame"
+            height= 500
+            width = 500
+    >
+    
+    </canvas>
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

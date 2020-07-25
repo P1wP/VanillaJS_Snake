@@ -1,0 +1,13 @@
+#canvasGame {
+  display: flex;
+  justify-content: center;
+  border: 3px solid #64c832;
+  margin: 0 auto;
+}
+
+body {
+  background: black;
+  color: white;
+}
+
+/*# sourceMappingURL=styles.css.map */
