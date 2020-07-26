@@ -1,11 +1,13 @@
 // VANILLA JS 
 // RETRO SNAKE GAME
 
+
 function checkSupported() {
     canvas = document.getElementById("canvasGame");
     if( canvas.getContext ){
         // CANVAS IS SUPPORTED
         ctx = canvas.getContext("2d");
+        ctx.clearRect(0,0, canvas.width, canvas.height);
         
         // GLOBALish
         this.currentPosition = [50,50];  // SNAKE HEAD;
@@ -70,7 +72,15 @@ function checkSupported() {
                     moveSnake();
                     break;
             }
-        }
+        } // END KEY EVENT
+        
+        // TOUCH EVENT _ JQUERY
+        // START
+   
+       $('#canvasGame').on('swipeleft', function(){
+           console.log("LEFT");
+       });
+       
         
         // DRAW SNAKE
         function drawSnake(){
@@ -156,7 +166,6 @@ function checkSupported() {
         
         function food(){
             foodLocation = [Math.floor(Math.random() * (canvas.width / width)) * width, Math.floor(Math.random() * (canvas.height / height)) * height];
-            console.log(foodLocation)
             
             if( tail.length > 3){
                 for( var i = 0; i < tail.length; i++){
@@ -203,6 +212,19 @@ function checkSupported() {
                         localStorage.setItem("snakeScore", points);
                         document.getElementById("highscore").innerHTML=pointsToString;
                     } // END IF
+                    ctx.clearRect(0,0, canvas.width, canvas.height);
+                    currentPosition = [50,50];
+                    points = 0;
+                    foodEaten = 0;
+                    
+                    // GAME OVER MESSAGE
+                    ctx.strokeStyle="rgb(0,255,0)";
+                    ctx.font = "40px Arial";
+                    ctx.strokeRect(canvas.width/5, canvas.height/3, 300, 100);
+                    ctx.textAlign = "center";
+                    ctx.fillText("Game Over", canvas.width/2, 225);
+                    ctx.stroke;
+                
                 }// END IF
             }
             
