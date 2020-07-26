@@ -74,12 +74,50 @@ function checkSupported() {
             }
         } // END KEY EVENT
         
-        // TOUCH EVENT _ JQUERY
-        // START
-   
-       $('#canvasGame').on('swipeleft', function(){
-           console.log("LEFT");
-       });
+        // TOUCH EVENT 
+        var touchstartX = 0;
+        var touchstartY = 0;
+        var touchendX = 0;
+        var touchendY = 0;
+
+        var swiper = document.getElementById('canvasGame');
+
+        swiper.addEventListener('touchstart', function(event) {
+            touchstartX = event.changedTouches[0].screenX;
+            touchstartY = event.changedTouches[0].screenY;
+        }, false);
+
+        swiper.addEventListener('touchend', function(event) {
+            touchendX = event.changedTouches[0].screenX;
+            touchendY = event.changedTouches[0].screenY;
+            handleSwipe();
+        }, false); 
+
+        function handleSwipe() {
+            if (touchendX <= touchstartX) {
+                console.log('Swiped left');
+                direction = "left";
+            }
+    
+            if (touchendX >= touchstartX) {
+                console.log('Swiped right');
+                direction = "right";
+            }
+    
+            if (touchendY <= touchstartY) {
+                console.log('Swiped up');
+                direction = "up";
+            }
+    
+            if (touchendY >= touchstartY) {
+                console.log('Swiped down');
+                direction = "down";
+            }
+    
+            if (touchendY === touchstartY) {
+                console.log('Tap');
+            }
+        }
        
         
         // DRAW SNAKE
