@@ -273,6 +273,8 @@ function checkSupported() {
                     ctx.textAlign = "center";
                     ctx.fillText("Game Over", canvas.width/2, 200);
                     ctx.stroke;
+                    
+                    setTimeout(checkSupported, 3000); // RESTART GAME
                 
                 }// END IF
             }
