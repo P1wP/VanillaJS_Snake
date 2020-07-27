@@ -236,7 +236,7 @@ function checkSupported() {
         function grow(){
             if(currentPosition[0] === foodLocation[0] && currentPosition[1] === foodLocation[1]){
                 foodEaten++;
-                snakeLength += foodEaten;
+                snakeLength++;
                 speed = speed - 25;
                 points = foodEaten * 10;
                 var pointToString = points.toString();
