@@ -2,6 +2,9 @@
 // RETRO SNAKE GAME
 
 
+
+        
+
 function checkSupported() {
     canvas = document.getElementById("canvasGame");
     if( canvas.getContext ){
@@ -75,49 +78,57 @@ function checkSupported() {
         } // END KEY EVENT
         
         // TOUCH EVENT 
-        var touchstartX = 0;
-        var touchstartY = 0;
-        var touchendX = 0;
-        var touchendY = 0;
-
-        var swiper = document.getElementById('canvasGame');
+        // SWIPE CONTROLLES
+        var swiper = document.getElementById('swiperBody');
+        var startX = 0;
+        var startY = 0;
 
         swiper.addEventListener('touchstart', function(event) {
-            touchstartX = event.changedTouches[0].screenX;
-            touchstartY = event.changedTouches[0].screenY;
+            startX = event.changedTouches[0].screenX;
+            startY = event.changedTouches[0].screenY;
         }, false);
 
         swiper.addEventListener('touchend', function(event) {
-            touchendX = event.changedTouches[0].screenX;
-            touchendY = event.changedTouches[0].screenY;
-            handleSwipe();
-        }, false); 
+            var diffX = event.changedTouches[0].screenX - startX;
+            var diffY = event.changedTouches[0].screenY - startY;
+            var ratioX = Math.abs(diffX / diffY);
+            var ratioY = Math.abs(diffY / diffX);
+            var absDiff = Math.abs(ratioX > ratioY ? diffX : diffY);
+    
+            // IGNORE SMALL MOVEMENTS
+            if (absDiff < 30){
+                return;
+            }
+    
+            if (ratioX > ratioY) {
+                if (diffX >= 0) {
+                    if(direction === "left"){
+                        return;
+                    }
+                    direction = "right";
+                } else {
+                    if(direction === "right"){
+                        return;
+                    }
+                    direction = "left";
+                }
+            } else {
+                if (diffY >= 0) {
+                    if(direction === "up"){
+                        return;
+                    }
+                    direction = "down";
+                } else {
+                    if(direction === "down"){
+                        return;
+                    }
+                    direction = "up";
+                }
+            }
+        }, false); // END SWIPE CONTROLLS
 
-        function handleSwipe() {
-            if (touchendX <= touchstartX) {
-                console.log('Swiped left');
-                direction = "left";
-            }
-    
-            if (touchendX >= touchstartX) {
-                console.log('Swiped right');
-                direction = "right";
-            }
-    
-            if (touchendY <= touchstartY) {
-                console.log('Swiped up');
-                direction = "up";
-            }
-    
-            if (touchendY >= touchstartY) {
-                console.log('Swiped down');
-                direction = "down";
-            }
-    
-            if (touchendY === touchstartY) {
-                console.log('Tap');
-            }
-        }
+
+       
        
         
         // DRAW SNAKE
@@ -258,9 +269,9 @@ function checkSupported() {
                     // GAME OVER MESSAGE
                     ctx.strokeStyle="rgb(0,255,0)";
                     ctx.font = "40px Arial";
-                    ctx.strokeRect(canvas.width/5, canvas.height/3, 300, 100);
+                    ctx.strokeRect(canvas.width/7, canvas.height/3, 300, 100);
                     ctx.textAlign = "center";
-                    ctx.fillText("Game Over", canvas.width/2, 225);
+                    ctx.fillText("Game Over", canvas.width/2, 200);
                     ctx.stroke;
                 
                 }// END IF
